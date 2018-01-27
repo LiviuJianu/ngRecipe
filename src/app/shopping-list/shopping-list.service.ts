@@ -23,4 +23,10 @@ export class ShoppingListService {
     return this.ingredients.slice();
   }
 
+  addIngredients(ingredients: Ingredient[]) {
+    ingredients.forEach((ingredient) => {
+      this.addIngredient(ingredient);
+    });
+  }
+
 }
