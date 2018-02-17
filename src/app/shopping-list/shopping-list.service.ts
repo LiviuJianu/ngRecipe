@@ -41,4 +41,9 @@ export class ShoppingListService {
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 
+  deleteIngredient(editedItemIndex: number) {
+    this.ingredients.splice(editedItemIndex, 1);
+    this.ingredientsChanged.next(this.ingredients.slice());
+
+  }
 }
