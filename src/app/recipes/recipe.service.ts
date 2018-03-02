@@ -22,7 +22,7 @@ export class RecipeService {
     new Recipe(
       'Burger',
       'excelent burger',
-      'http://peterburger.ro/wp-content/uploads/2017/11/peter-burger-bucuresti-livrare-02.png',
+      'https://www.325fss.com/wp-content/uploads/2017/10/image.jpg',
       [
         new Ingredient('bread', 2),
         new Ingredient('meat', 1)
@@ -30,6 +30,11 @@ export class RecipeService {
   ];
 
   constructor(private shoppingListService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.getRecipes());
+  }
 
   getRecipes() {
     return this.recipes.slice();
