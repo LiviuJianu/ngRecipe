@@ -4,7 +4,7 @@ import { Recipe } from '../recipes/recipe.model';
 
 import 'rxjs/add/operator/map';
 import { AuthService } from '../auth/auth.service';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class DataStorageService {
@@ -20,11 +20,18 @@ export class DataStorageService {
   storeRecipes() {
     const token = this.authService.getToken();
 
-    return this.httpClient.put(this.firebase, this.recipeService.getRecipes(), {
-      observe: 'body',
-      // headers: new HttpHeaders().set('Authorization', 'angular authorization')
+    // return this.httpClient.put(this.firebase, this.recipeService.getRecipes(), {
+    //   observe: 'body',
+    //   // headers: new HttpHeaders().set('Authorization', 'angular authorization')
+    //   params: new HttpParams().set('auth', token)
+    // });
+
+    const req = new HttpRequest('PUT', this.firebase, this.recipeService.getRecipes(), {
+      reportProgress: true,
       params: new HttpParams().set('auth', token)
     });
+
+    return this.httpClient.request(req);
   }
 
   getRecipes() {
