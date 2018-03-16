@@ -34,7 +34,7 @@ export class DataStorageService {
   getRecipes() {
     // return this.httpClient.get<Recipe[]>(this.firebase + '?auth=' + token)
     return this.httpClient.get<Recipe[]>(this.firebase, {
-      observe: 'response',
+      observe: 'body',
       responseType: 'json'
     })
       .map(
