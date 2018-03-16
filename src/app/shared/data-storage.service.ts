@@ -26,7 +26,11 @@ export class DataStorageService {
   getRecipes() {
     const token = this.authService.getToken();
 
-    return this.httpClient.get<Recipe[]>(this.firebase + '?auth=' + token)
+    // return this.httpClient.get<Recipe[]>(this.firebase + '?auth=' + token)
+    return this.httpClient.get<Recipe[]>(this.firebase + '?auth=' + token, {
+      observe: 'response',
+      responseType: 'json'
+    })
       .map(
         (recipes) => {
           for (const recipe of recipes) {
