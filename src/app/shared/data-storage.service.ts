@@ -4,7 +4,7 @@ import { Recipe } from '../recipes/recipe.model';
 
 import 'rxjs/add/operator/map';
 import { AuthService } from '../auth/auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class DataStorageService {
@@ -20,9 +20,10 @@ export class DataStorageService {
   storeRecipes() {
     const token = this.authService.getToken();
 
-    return this.httpClient.put(this.firebase + '?auth=' + token, this.recipeService.getRecipes(), {
+    return this.httpClient.put(this.firebase, this.recipeService.getRecipes(), {
       observe: 'body',
       // headers: new HttpHeaders().set('Authorization', 'angular authorization')
+      params: new HttpParams().set('auth', token)
     });
   }
 
@@ -30,9 +31,10 @@ export class DataStorageService {
     const token = this.authService.getToken();
 
     // return this.httpClient.get<Recipe[]>(this.firebase + '?auth=' + token)
-    return this.httpClient.get<Recipe[]>(this.firebase + '?auth=' + token, {
+    return this.httpClient.get<Recipe[]>(this.firebase, {
       observe: 'response',
-      responseType: 'json'
+      responseType: 'json',
+      headers: new HttpHeaders().set('auth', token)
     })
       .map(
         (recipes) => {
