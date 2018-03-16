@@ -18,8 +18,6 @@ export class DataStorageService {
   }
 
   storeRecipes() {
-    const token = this.authService.getToken();
-
     // return this.httpClient.put(this.firebase, this.recipeService.getRecipes(), {
     //   observe: 'body',
     //   // headers: new HttpHeaders().set('Authorization', 'angular authorization')
@@ -27,21 +25,17 @@ export class DataStorageService {
     // });
 
     const req = new HttpRequest('PUT', this.firebase, this.recipeService.getRecipes(), {
-      reportProgress: true,
-      params: new HttpParams().set('auth', token)
+      reportProgress: true
     });
 
     return this.httpClient.request(req);
   }
 
   getRecipes() {
-    const token = this.authService.getToken();
-
     // return this.httpClient.get<Recipe[]>(this.firebase + '?auth=' + token)
     return this.httpClient.get<Recipe[]>(this.firebase, {
       observe: 'response',
-      responseType: 'json',
-      headers: new HttpHeaders().set('auth', token)
+      responseType: 'json'
     })
       .map(
         (recipes) => {
