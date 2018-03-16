@@ -20,7 +20,9 @@ export class DataStorageService {
   storeRecipes() {
     const token = this.authService.getToken();
 
-    return this.httpClient.put(this.firebase + '?auth=' + token, this.recipeService.getRecipes());
+    return this.httpClient.put(this.firebase + '?auth=' + token, this.recipeService.getRecipes(), {
+      observe: 'body'
+    });
   }
 
   getRecipes() {
