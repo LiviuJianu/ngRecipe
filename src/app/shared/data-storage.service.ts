@@ -4,7 +4,7 @@ import { Recipe } from '../recipes/recipe.model';
 
 import 'rxjs/add/operator/map';
 import { AuthService } from '../auth/auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class DataStorageService {
@@ -22,7 +22,7 @@ export class DataStorageService {
 
     return this.httpClient.put(this.firebase + '?auth=' + token, this.recipeService.getRecipes(), {
       observe: 'body',
-      headers: new HttpHeaders().set('Authorization', 'angular authorization')
+      // headers: new HttpHeaders().set('Authorization', 'angular authorization')
     });
   }
 
