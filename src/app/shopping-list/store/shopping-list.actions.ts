@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import { Ingredient } from '../../shared/ingredient.module';
 
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const ADD_INGREDIENTS = 'ADD_INGREDIENTS';
 
 export class AddIngredient implements Action {
   readonly type: string = ADD_INGREDIENT;
@@ -9,5 +10,11 @@ export class AddIngredient implements Action {
   constructor(public payload: Ingredient) {}
 }
 
+export class AddIngredients implements Action {
+  readonly type: string = ADD_INGREDIENTS;
 
-export type ShoppingListActions = AddIngredient;
+  constructor(public payload: Ingredient[]) {}
+}
+
+
+export type ShoppingListActions = AddIngredient | AddIngredients;
