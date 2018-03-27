@@ -3,7 +3,7 @@
     <app-shopping-edit></app-shopping-edit>
     <hr>
     <ul class="list-group">
-      <a *ngFor="let ingredient of ingredients; let id = index"
+      <a *ngFor="let ingredient of (shoppingListState | async).ingredients; let id = index"
          class="list-group-item"
          style="cursor: pointer"
         (click)="onEditItem(id)"

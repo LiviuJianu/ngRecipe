@@ -10,7 +10,6 @@ export class ShoppingListService {
     new Ingredient('apples', 5),
     new Ingredient('tomatos', 10)
 
-
   ];
 
   constructor() { }
