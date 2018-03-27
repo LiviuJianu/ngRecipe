@@ -5,7 +5,6 @@ import { Subject } from 'rxjs/Subject';
 import { Store } from '@ngrx/store';
 import * as ShoppingListActionsExport from '../shopping-list/store/shopping-list.actions';
 
-@Injectable()
 export class RecipeService {
 
   recipesChanged = new Subject<Recipe[]>();
@@ -30,8 +29,7 @@ export class RecipeService {
       ])
   ];
 
-  constructor(private store: Store<{ shoppingList: { ingredients: Ingredient[] } }>) {
-  }
+  constructor() {}
 
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
@@ -45,12 +43,6 @@ export class RecipeService {
   getRecipe(id: number) {
     return this.recipes[id];
   }
-
-
-  addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    this.store.dispatch(new ShoppingListActionsExport.AddIngredients(ingredients));
-  }
-
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
