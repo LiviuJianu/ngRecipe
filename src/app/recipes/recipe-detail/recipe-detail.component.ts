@@ -3,8 +3,8 @@ import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Ingredient } from '../../shared/ingredient.module';
 
+import * as fromShoppingList from '../../shopping-list/store/shopping-list.reducers';
 import * as ShoppingListActionsExport from '../../shopping-list/store/shopping-list.actions';
 
 
@@ -20,7 +20,7 @@ export class RecipeDetailComponent implements OnInit {
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
               private router: Router,
-              private store: Store<{ shoppingList: { ingredients: Ingredient[]}}>) { }
+              private store: Store<fromShoppingList.AppState>) { }
 
   ngOnInit() {
     this.route.params.subscribe(
