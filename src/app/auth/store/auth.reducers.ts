@@ -10,6 +10,6 @@ const initialState: State = {
     authenticated: false
   };
 
-export function authReducers(state, action) {
+export function authReducer(state, action) {
   return state;
 }
