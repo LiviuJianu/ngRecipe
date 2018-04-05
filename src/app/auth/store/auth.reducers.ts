@@ -26,5 +26,4 @@ export function authReducer(state = initialState, action: AuthActionsExports.Aut
     default:
       return state;
   }
-  return state;
 }
