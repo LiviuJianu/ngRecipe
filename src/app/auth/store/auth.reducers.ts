@@ -1,4 +1,5 @@
 import * as AuthActionsExports from './auth.actions';
+
 export interface State {
   token: string;
   authenticated: boolean;

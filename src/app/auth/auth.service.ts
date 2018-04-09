@@ -2,6 +2,7 @@ import * as firebase from 'firebase';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import * as fromApp from '../store/app.reducers';
 import * as AuthActionsExport from './store/auth.actions';
 
@@ -48,6 +49,5 @@ export class AuthService {
   logout() {
     firebase.auth().signOut();
     this.store.dispatch(new AuthActionsExport.Logout());
-    this.token = null;
   }
 }

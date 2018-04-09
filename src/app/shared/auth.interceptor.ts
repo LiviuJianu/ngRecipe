@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducers';
 import * as fromAuth from '../auth/store/auth.reducers';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/take';
 
 
 @Injectable()
@@ -17,8 +18,9 @@ export class AuthInterceptor implements HttpInterceptor {
     console.log('Intercepted:', request);
 
 
-    return this.store.select('auth').switchMap(
-      (authState: fromAuth.State) => {
+    return this.store.select('auth')
+      .take(1)
+      .switchMap((authState: fromAuth.State) => {
         const copiedRequest = request.clone({
           // headers: request.headers.append('auth', 'asadasd')
           params: request.params.set('auth', authState.token)
