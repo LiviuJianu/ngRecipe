@@ -7,27 +7,27 @@ export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
 
 export class TrySignup implements Action {
-  type = TRY_SIGNUP;
+  readonly type = TRY_SIGNUP;
 
   constructor(public payload: {username: string, password: string}) {}
 }
 
 export class Signup implements Action {
-  type = SIGNUP;
+  readonly type = SIGNUP;
 }
 
 export class Signin implements Action {
-  type = SIGNIN;
+  readonly type = SIGNIN;
 }
 
 export class Logout implements Action {
-  type = LOGOUT;
+  readonly type = LOGOUT;
 }
 
 export class SetToken implements Action {
-  type = SET_TOKEN;
+  readonly type = SET_TOKEN;
 
-  constructor(public payload: string) {}
+  constructor(public payload) {}
 }
 
 export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup;
