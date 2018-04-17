@@ -8,6 +8,7 @@ import { DataStorageService } from '../../shared/data-storage.service';
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
 import * as AuthActionsExport from '../../auth/store/auth.actions';
+import * as RecipeActionsExport from '../../recipes/store/recipe.actions';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onFetchData() {
-    this.dataStorage.getRecipes();
+    this.store.dispatch(new RecipeActionsExport.FetchRecipes());
   }
 
   onLogout() {
