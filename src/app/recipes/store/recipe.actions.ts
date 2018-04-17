@@ -7,7 +7,7 @@ export const UPDATE_RECIPE = 'UPDATE_RECIPE';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
 
 export class SetRecipes implements Action {
-  readonly type = SET_RECIPES;
+  readonly type = SET_RECIPE;
 
   constructor(public payload: Recipe[]) {}
 }

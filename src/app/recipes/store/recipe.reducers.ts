@@ -11,7 +11,7 @@ export interface State {
 }
 
 const initialState: State = {
-  recipes : [
+  recipes: [
     new Recipe(
       'Schnitzel',
       'delicious schnitzel',
@@ -38,5 +38,31 @@ export function recipeReducer(state = initialState, action: RecipeActionsExport.
         ...state,
         recipes: [...action.payload]
       };
+    case (RecipeActionsExport.ADD_RECIPE):
+      return {
+        ...state,
+        recipes: [...state.recipes, action.payload]
+      };
+    case (RecipeActionsExport.UPDATE_RECIPE):
+      const recipe = state.recipes[action.payload.index];
+      const updatedRecipe = {
+        ...recipe,
+        ...action.payload.updatedRecipe
+      };
+      const recipes = [...state.recipes];
+      recipes[action.payload.index] = updatedRecipe;
+      return {
+        ...state,
+        recipes: recipes
+      };
+    case (RecipeActionsExport.DELETE_RECIPE):
+      const oldRecipes = [...state.recipes];
+      oldRecipes.splice(action.payload, 1);
+      return {
+        ...state,
+        recipes: oldRecipes
+      };
+    default:
+      return state;
   }
 }
