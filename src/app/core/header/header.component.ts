@@ -3,8 +3,6 @@ import { Store } from '@ngrx/store';
 
 import { Observable } from 'rxjs/Observable';
 
-import { DataStorageService } from '../../shared/data-storage.service';
-
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
 import * as AuthActionsExport from '../../auth/store/auth.actions';
@@ -18,8 +16,7 @@ import * as RecipeActionsExport from '../../recipes/store/recipe.actions';
 export class HeaderComponent implements OnInit {
   authState: Observable<fromAuth.State>;
 
-  constructor(private dataStorage: DataStorageService,
-              private store: Store<fromApp.AppState>) {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   onSaveData() {
     this.store.dispatch(new RecipeActionsExport.StoreRecipes());
