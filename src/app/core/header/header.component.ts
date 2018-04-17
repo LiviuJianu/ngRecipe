@@ -22,12 +22,7 @@ export class HeaderComponent implements OnInit {
               private store: Store<fromApp.AppState>) {}
 
   onSaveData() {
-    this.dataStorage.storeRecipes()
-      .subscribe(
-        (response) => {
-          console.log(response);
-        }
-      );
+    this.store.dispatch(new RecipeActionsExport.StoreRecipes());
   }
 
   ngOnInit() {
