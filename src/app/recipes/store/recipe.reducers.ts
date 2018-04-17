@@ -1,5 +1,6 @@
 import { Recipe } from '../recipe.model';
 import { Ingredient } from '../../shared/ingredient.module';
+import * as RecipeActionsExport from './recipe.actions';
 
 export interface FeatureState {
   recipes: State;
@@ -30,6 +31,12 @@ const initialState: State = {
   ]
 };
 
-export function recipeReducer(state = initialState, action) {
-  return state;
+export function recipeReducer(state = initialState, action: RecipeActionsExport.RecipeActions) {
+  switch (action.type) {
+    case (RecipeActionsExport.SET_RECIPE):
+      return {
+        ...state,
+        recipes: [...action.payload]
+      };
+  }
 }
