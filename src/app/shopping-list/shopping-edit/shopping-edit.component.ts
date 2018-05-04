@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Ingredient } from '../../shared/ingredient.module';
@@ -64,7 +64,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.store.dispatch(new ShoppingListActionExports.StopEdit())
+    this.store.dispatch(new ShoppingListActionExports.StopEdit());
     this.subscription.unsubscribe();
   }
 

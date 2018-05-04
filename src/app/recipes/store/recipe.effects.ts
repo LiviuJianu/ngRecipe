@@ -1,6 +1,6 @@
 import { Actions, Effect } from '@ngrx/effects';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/withLatestFrom';
+import { take, switchMap, withLatestFrom, map } from 'rxjs/operators';
+
 
 import { Recipe } from '../recipe.model';
 import { HttpClient, HttpRequest } from '@angular/common/http';
@@ -18,13 +18,14 @@ export class RecipeEffects {
   @Effect()
   recipeFetch = this.actions
     .ofType(RecipeActionsExport.FETCH_RECIPES)
-    .switchMap((action: RecipeActionsExport.FetchRecipes) => {
+    .pipe(
+    switchMap((action: RecipeActionsExport.FetchRecipes) => {
       return this.httpClient.get<Recipe[]>(this.firebase, {
         observe: 'body',
         responseType: 'json'
       });
     })
-    .map(
+    , map(
       (recipes) => {
         for (const recipe of recipes) {
           if (!recipe['ingredients']) {
@@ -37,19 +38,20 @@ export class RecipeEffects {
           payload: recipes
         };
       }
-    );
+    ));
 
     @Effect({dispatch: false})
     recipeStore = this.actions
       .ofType(RecipeActionsExport.STORE_RECIPES)
-      .withLatestFrom(this.store.select('recipes'))
-      .switchMap(([action, state]) => {
+      .pipe(
+      withLatestFrom(this.store.select('recipes'))
+      , switchMap(([action, state]) => {
         const req = new HttpRequest('PUT', this.firebase, state.recipes, {
           reportProgress: true
         });
 
         return this.httpClient.request(req);
-      });
+      }));
 
 
 
